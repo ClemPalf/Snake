@@ -1,4 +1,4 @@
-# CPPND: Capstone Snake Game Example
+# Personalized Snake Game
 
 
 
