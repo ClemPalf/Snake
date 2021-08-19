@@ -1,8 +1,10 @@
 # Personalized Snake Game
 
 
-
-<img src="snake_game.gif"/>
+<p align="center">
+  <img src="https://github.com/ClemPalf/Snake/blob/main/Illustration_1.png?raw=true"/>
+  <img src="https://github.com/ClemPalf/Snake/blob/main/Illustration_2.png?raw=true"/>
+</p>
 
 
 ## Dependencies for Running Locally
