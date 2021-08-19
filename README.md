@@ -46,13 +46,6 @@ split the body from where the head is. The body become the part with the head, t
 - STEP 2.5   
 -Within Snake::UpdateBody, check if the head hit the deadBody, if it is, it’s over!  
 
-## Rubric points  
-- The project demonstrates an understanding of C++ functions and control structures. --> Many loops were used throughout the project + creation of std::vector<SDL_point>
-- The project makes use of references in function declarations. --> STEP 2.2 
-- The project uses Object Oriented Programming techniques. --> All the project
-- Classes use appropriate access specifiers for class members. --> STEP 1.1 & STEP 1.2 & STEP 1.3
-- Classes abstract implementation details from their interfaces. --> Efforts were made for STEP 2.3
-
 
 ## Dependencies for Running Locally
 * cmake >= 3.7
