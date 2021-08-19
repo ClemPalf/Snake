@@ -1,10 +1,10 @@
 #include "game.h"
-#include <iostream>
 #include "SDL.h"
+#include <iostream>
 
 Game::Game(std::size_t grid_width, std::size_t grid_height)
-    : snake(grid_width, grid_height),
-      engine(dev()),
+    : snake(grid_width, grid_height), engine(dev()),
+      random_color(0, 3), // STEP 1.2
       random_w(0, static_cast<int>(grid_width - 1)),
       random_h(0, static_cast<int>(grid_height - 1)) {
   PlaceFood();
@@ -25,7 +25,9 @@ void Game::Run(Controller const &controller, Renderer &renderer,
     // Input, Update, Render - the main game loop.
     controller.HandleInput(running, snake);
     Update();
-    renderer.Render(snake, food);
+
+    renderer.Render(snake, food, _foodColor,
+                    _cannibalFood); // STEP 1.3 + STEP 2.2
 
     frame_end = SDL_GetTicks();
 
@@ -39,7 +41,14 @@ void Game::Run(Controller const &controller, Renderer &renderer,
       renderer.UpdateWindowTitle(score, frame_count);
       frame_count = 0;
       title_timestamp = frame_end;
+      // STEP 2.4
+      snake._lifeDeadBody++; // Age the dead body
     }
+
+    // STEP 2.4
+    if (snake._lifeDeadBody > 10) {
+      snake._deadBody.clear();
+    };
 
     // If the time for this frame is too small (i.e. frame_duration is
     // smaller than the target ms_per_frame), delay the loop to
@@ -66,7 +75,8 @@ void Game::PlaceFood() {
 }
 
 void Game::Update() {
-  if (!snake.alive) return;
+  if (!snake.alive)
+    return;
 
   snake.Update();
 
@@ -76,7 +86,23 @@ void Game::Update() {
   // Check if there's food over here
   if (food.x == new_x && food.y == new_y) {
     score++;
+
+    // STEP 1.3
+    snake._snakeColor = _foodColor;    // The snake takes on the food Color
+    _foodColor = random_color(engine); // A new color is picked for the food
     PlaceFood();
+
+    // STEP 2.1
+    if ((GetScore() + 1) % 15 == 0) { // Is it time for some cannibalisme? 
+      _cannibalFood = true;
+    } else if (GetScore() % 15 == 0) {
+      snake._cannibal = true;
+      _cannibalFood = false;
+    } else {
+      snake._cannibal = false;
+      _cannibalFood = false;
+    }
+
     // Grow snake and increase speed.
     snake.GrowBody();
     snake.speed += 0.01;
