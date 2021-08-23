@@ -8,7 +8,7 @@
 </p>
 
 ## Description
-I built this little snake game on top of a udacity [repo](https://github.com/udacity/CppND-Capstone-Snake-Game), to which I added the 2 additional features:                      
+I built this little snake game on top of a udacity [repo](https://github.com/udacity/CppND-Capstone-Snake-Game), to which I added 2 features:                      
 1) **Snake/Cameleon!
 The food is assigned a random color every time it is instantiated (4 different colors). When the snake eats the food, it takes on the food color.**                                                                                                                                                                                                                  
 - STEP 1.1  
